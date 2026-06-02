@@ -1,0 +1,533 @@
+body {
+    background: url("bgfortables.jpg") no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* ========= GLOBAL RESET & BASE STYLES ========= */
+body, html {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* ========== DASHBOARD CONTAINER ========== */
+.dashboard-container {
+  display: flex;               /* Sidebar + main content side by side */
+  min-height: 100vh;           /* Full screen height */
+  width: 100%;
+  position: relative;
+}
+
+.dashboard-container.with-sidebar-open {
+  padding-left: 0; /* Sidebar overlays instead of pushing content */
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+  width: 240px;
+ height: 100vh;
+ background: #90210b; /* keep background during entire slide; sidebar is off-screen when closed */
+ color: white;
+ padding: 30px;
+ display: flex;
+ flex-direction: column;
+ border-top-right-radius: 20px;
+ border-bottom-right-radius: 20px;
+ flex-shrink: 0;
+ position: fixed;
+ top: 0;
+ left: 0;
+ transform: translateX(-100%); /* fully hidden when closed */
+ transition: transform 0.5s ease-in-out;
+ z-index: 10000;
+ overflow: hidden; /* ensure children never extend beyond sidebar bounds during slide */
+ will-change: transform;
+ 
+}
+
+
+.sidebar.open {
+ transform: translateX(0);
+}
+
+/* when closed it is fully hidden; no pointer cursor needed */
+
+
+
+
+/* Overlay behind sidebar when open */
+.sidebar-overlay {
+ position: fixed;
+ inset: 0;
+ background: rgba(0,0,0,0.3);
+ opacity: 0;
+ visibility: hidden;
+ transition: opacity 0.5s ease-in-out;
+ z-index: 9999;
+}
+
+.sidebar-overlay.visible {
+ opacity: 1;
+ visibility: visible;
+}
+
+
+.sidebar-logo {
+   width: 30px;               /* adjust size */
+   height: auto;
+   margin-right: 10px; 
+   margin-left: 0;
+   cursor: pointer;
+   
+   
+}
+
+/* Launcher button shown when sidebar is hidden */
+.sidebar-launcher {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10002;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.sidebar-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    /* Soft floating shadow */
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.18);
+}
+
+.sidebar-icon span {
+    width: 26px;
+    height: 3px;
+    background: #b32424;     /* UM Clinic red highlight */
+    border-radius: 4px;
+  
+
+    /* Smooth appearance animation */
+    transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.sidebar-icon:hover {
+    box-shadow: 0px 6px 16px rgba(0,0,0,0.22);
+    transform: translateY(-2px);
+}
+/* background is already defined on .sidebar, no need to restyle on open */
+
+.sidebar h2 {  
+   display: flex;
+   text-align: center;
+   align-items: center;
+   margin-bottom: 20px;
+   margin-left: 0;
+   font-size: 22px;
+   font-family: 'Droid Serif';
+   font-size: 35px;
+}
+
+/* When sidebar is open, position the title next to the launcher icon (left:12px, width:40px) */
+/* Title remains centered by default; no special positioning when open */
+
+.sidebar ul {
+ list-style: none;
+ margin-left: -25%; /* restored original offset */
+}
+
+.sidebar ul li {
+
+ margin: 15px 0;
+
+}
+.bottom {
+  margin-top: auto;
+  margin-bottom: 50px;
+}
+
+.sidebar ul li a { 
+ text-decoration: none;
+ color: white;
+ font-weight: 500;
+ display: block;
+ padding: 10px 12px;
+ border-radius: 8px;
+ transition: background 0.3s;
+ margin-left: 10px; /* original spacing restored */
+}
+
+.sidebar ul li a:hover {
+
+ background: #dbab1b;
+}
+/* Active/current page link */
+.sidebar ul li a.active {
+  background: #d4af37; /* gold */
+  color: #000; /* readable on gold */
+  font-weight: 700;
+  position: relative;
+}
+
+/* Left indicator bar for active item */
+.sidebar ul li a.active::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 24px;
+  background: #ffffff;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Keep hover from overriding active style */
+.sidebar ul li a:hover:not(.active) {
+  background: #dbab1b;
+  color: #000;
+}
+/* ========== MAIN CONTENT ========== */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  margin-left: 0;
+  /* stays centered */
+  width: 100%;
+}
+
+/* ========== TOP HEADER ========== */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.welcome-text {
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.top-header h1 {
+  color: #b32424;
+  font-size: 26px;
+  margin: 0;
+}
+
+.header-actions {
+  position: absolute;
+  right: 25px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #ff4b5c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #e63946;
+}
+
+/* ========== RECORD SECTION ========== */
+.record {
+  width: 90%;
+  margin: 0 auto;
+  padding: 6px 0 40px;
+}
+
+/* Container for table + buttons */
+.patient-div {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.add-btn,
+.edit-btn {
+  background: #7a0909;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-btn:hover,
+.edit-btn:hover:hover {
+  background: #b32424;
+}
+
+/* ========== TABLE STYLING ========== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th {
+  background-color: #b32424;
+  color: white;
+  padding: 30px;
+  text-transform: capitalize;
+  border: 1px solid #ddd;
+}
+
+table td {
+  padding: 20px;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.role-filter {
+  background: white;
+  /* blend into header */
+  border: 1px;
+  border-radius: 5px;
+  color: black;
+  /* white text on red header */
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Make dropdown list yellow */
+.role-filter option {
+  background-color: white;
+  /* gold/yellow background */
+  color: #000;
+  /* black text for contrast */
+  border-radius: 3px;
+}
+
+/* Optional: hover or selected style inside dropdown */
+.role-filter option:checked,
+.role-filter option:hover {
+  background-color: white;
+  /* darker yellow for hover */
+  color: #000;
+}
+
+/*=================================STYLE FOR MODALS=================================================================================*/
+/* FOR ADD MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #b32424;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.modal-content .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.close-btn {
+  background: #aaa;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #888;
+}
+
+.save-btn {
+  background: #7a0909;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.save-btn:hover {
+  background: #b32424;
+}
+
+/* FOR EDIT MODAL */
+#editModal .modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+#editModal h2 {
+  margin-top: 0;
+  color: #b32424;
+}
+
+#editModal label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+#editModal input,
+#editModal select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+#editModal .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Scrollable patient table like Inventory/Medical */
+.patient-scroll {
+    max-height: 450px;      /* adjust as you want */
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Sticky table headers */
+.patient-scroll table th {
+    position: sticky;
+    top: 0;
+    background: #90210b;   /* same header color */
+    color: white;
+    z-index: 5;
+}
+
+/*---------------------------------------PATIENT SEARCH BAR-------------------------------------------------------------------------------------*/
+
+.patient-search {
+    margin-left: 15px;
+    padding: 10px 14px;
+    width: 260px;
+    border-radius: 8px;
+    border: 2px solid #b32424; /* UM Clinic Red */
+    background: #ffffff;
+    font-size: 15px;
+    outline: none;
+    color: #333;
+    transition: 0.25s ease;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+}
+
+.patient-search:focus {
+    border-color: #7a0909;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
+}
+
+.patient-search::placeholder {
+    color: #666;
+    opacity: 0.8;
+}
+
+
+/*---------------------------------------PATIENT SEARCH BAR-------------------------------------------------------------------------------------*/
+
+.patient-search {
+    margin-left: 15px;
+    padding: 10px 14px;
+    width: 260px;
+    border-radius: 8px;
+    border: 2px solid #b32424; /* UM Clinic Red */
+    background: #ffffff;
+    font-size: 15px;
+    outline: none;
+    color: #333;
+    transition: 0.25s ease;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+}
+
+.patient-search:focus {
+    border-color: #7a0909;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
+}
+
+.patient-search::placeholder {
+    color: #666;
+    opacity: 0.8;
+}

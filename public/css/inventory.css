@@ -1,0 +1,536 @@
+/* ===================== INVENTORY TOOLBAR ===================== */
+.inv-toolbar {
+    width: 85%;
+    margin: 0 auto 10px auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.inv-toolbar input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    font-size: 15px;
+}
+
+.inv-toolbar select {
+    width: 180px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #90210b;
+    background: #fff;
+    font-weight: bold;
+}
+
+/* ===================== ADD BUTTON BELOW FILTER ===================== */
+.inv-add-container {
+    width: 100%;
+    padding-left: 525px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.inv-add-container .add-btn {
+    background: #90210b;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.inv-add-container .add-btn:hover {
+    background: #e63946;
+}
+
+/* ===================== INVENTORY TABLE ===================== */
+#table {
+    width: 85%;
+    margin: 20px auto;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+}
+
+#table thead th {
+    background: #90210b;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+#table tbody tr {
+    background: #ffffff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+}
+
+#table td {
+    padding: 15px;
+    text-align: center;
+}
+
+/* ===================== BUTTONS ===================== */
+.inv-btn {
+    background: #90210b;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.inv-btn:hover {
+    background: #e63946;
+}
+
+/* ===================== STATUS COLORS ===================== */
+.status-pill {
+    padding: 5px 12px;
+    border-radius: 15px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.expired {
+    background: #d00000;
+}
+
+.expiring {
+    background: #ffba08;
+    color: black;
+}
+
+.good {
+    background: #2a9d8f;
+}
+
+/* ===================== LOW STOCK ===================== */
+.low-stock {
+    color: #d62828 !important;
+    font-weight: bold;
+}
+
+/* ===================== BATCH TABLE ===================== */
+.batch-row {
+    background: #fafafa;
+    transition: all 0.3s ease-in-out;
+}
+
+.batch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.batch-table th {
+    background: #457b9d;
+    color: white;
+    padding: 10px;
+}
+
+.batch-table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.toggleBatches {
+    background: #457b9d !important;
+}
+
+.toggleBatches:hover {
+    background: #1d3557 !important;
+}
+
+/* ===================== MODALS ===================== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 20000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 420px;
+    max-width: 95%;
+    border-top: 6px solid #90210b;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.modal-content label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.modal-actions button {
+    margin-left: 10px;
+}
+
+/* ===================== QUANTITY BUTTONS ===================== */
+.qty-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.qty-btn {
+    background: #90210b;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.qty-btn:hover {
+    background: #e63946;
+}
+
+.qty-container input {
+    width: 70px;
+    text-align: center;
+}
+
+/* ===================== SCROLL FIX ===================== */
+html,
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+
+/* ===================== TITLE OVERRIDE FOR INVENTORY PAGE ===================== */
+.top-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.top-header .welcome-text {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 70px;
+    width: 100%;
+}
+
+.top-header h1 {
+    color: #b32424;
+    font-size: 35px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.top-header .header-actions {
+    position: absolute;
+    right: 75px;
+    top: 35%;
+    transform: translateY(-50%);
+}
+
+/* Scroll only rows */
+.inv-scroll {
+    max-height: 450px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 85%;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Sticky table header */
+.inv-scroll table thead th {
+    position: sticky;
+    top: 0;
+    background: #90210b;
+    color: white;
+    z-index: 100;
+}
+
+/* Inventory Table Container */
+#inventory-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Sidebar Button */
+.sidebar-launcher {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10002;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.sidebar-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.sidebar-icon span {
+    width: 26px;
+    height: 3px;
+    background: #b32424;
+    border-radius: 4px;
+    transition: all 0.25s ease;
+}
+
+.sidebar-icon:hover {
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.22);
+    transform: translateY(-2px);
+}
+
+/* ===================== PAGE BACKGROUND ===================== */
+body {
+    background: url("bgfortables.jpg") no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* ========= SIDEBAR RESTORE ========= */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #90210b;
+    color: white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    flex-shrink: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 9999;
+}
+
+.sidebar-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar h2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-family: 'Droid Serif';
+    font-size: 35px;
+}
+
+.sidebar ul {
+    list-style: none;
+    margin-left: -25%;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    margin-left: 10px;
+}
+
+.sidebar ul li a:hover {
+    background: #dbab1b;
+}
+
+.sidebar ul li a.active {
+    background: #d4af37;
+    color: #000;
+    font-weight: 700;
+    position: relative;
+}
+
+.sidebar ul li a.active::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 24px;
+    background: #ffffff;
+    border-radius: 0 4px 4px 0;
+}
+
+.sidebar ul li a:hover:not(.active) {
+    background: #dbab1b;
+    color: #000;
+}
+
+/* ========= SIDEBAR LAUNCHER (hamburger) ========= */
+.sidebar-launcher {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10002;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.sidebar-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.sidebar-icon span {
+    width: 26px;
+    height: 3px;
+    background: #b32424;
+    border-radius: 4px;
+    transition: all 0.25s ease;
+}
+
+.sidebar-icon:hover {
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.22);
+    transform: translateY(-2px);
+}
+
+/* ========= TOP HEADER + LOGOUT ========= */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.header-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.logout-btn {
+    background: #ff4b5c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #e63946;
+}
+
+
+#reportBtn {
+    margin-left: 15px; 
+    background:#90210b; 
+    color:white; 
+    padding:10px 20px; 
+    border-radius:8px; 
+    text-decoration:none;
+}
+#reportBtn:hover {
+    background:hsl(10, 86%, 45%); 
+}

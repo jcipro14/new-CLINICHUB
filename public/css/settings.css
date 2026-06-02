@@ -1,0 +1,123 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f5f5f5;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    background: #8B1E0A; /* match dashboard */
+    color: white;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    box-sizing: border-box; /* fixes white gap issue */
+}
+
+.sidebar h2 {
+    text-align: left;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    padding-left: 5px;
+}
+
+/* Sidebar menu items */
+.sidebar a {
+    padding: 14px 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: block;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #6c1808;
+}
+
+/* Logout button */
+.logout-btn {
+    margin-top: auto; 
+    padding: 14px;
+    background: #5a1407;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 17px;
+}
+
+.logout-btn:hover {
+    background: #4a1006;
+}
+
+
+/* MAIN CONTENT */
+.main-content {
+    margin-left: 240px;
+    padding: 25px;
+    width: calc(100% - 240px);
+}
+
+.title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #90210b;
+    margin-bottom: 20px;
+}
+
+/* SETTINGS CARD */
+.settings-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    width: 60%;
+}
+
+.settings-card h3 {
+    color: #90210b;
+    margin-bottom: 15px;
+}
+
+.settings-card label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.settings-card input,
+.settings-card select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    margin-top: 5px;
+}
+
+.save-btn {
+    background: #90210b;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.save-btn:hover {
+    background: #751a09;
+}

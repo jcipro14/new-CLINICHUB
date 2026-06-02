@@ -1,0 +1,278 @@
+/* ===== Global Styles ===== */
+
+
+body {
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    
+    background-image: url(asset/images/login-bg.png);
+    background-size: cover;
+    background-position: center;
+    color: #333;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+/* Center container to place login and register boxes in the middle */
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* full viewport height */
+  padding: 20px;     /* breathing room on small screens */
+  box-sizing: border-box;
+}
+    
+    /* ===== Login Box ===== */
+    
+.login-box {
+    
+    background: #D3D3D3;
+    padding: 25px 30px;
+    width: 320px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+}
+    
+.login-box h2 {
+    font-family: 'Poppins', sans-serif;
+    color: #b32424;
+    margin-bottom: 20px;
+    font-size: 25px;
+    text-align: center; /* ensure centered text */
+    width: 100%;        /* span full width for perfect centering */
+    }
+    
+    /* ===== Inputs ===== */
+    
+input, select {
+    width: 100%;
+    box-sizing: border-box; /* ensures padding + border stay within 100% width */
+    padding: 10px;          /* symmetrical padding on all sides */
+    margin: 8px 0;          /* vertical-only margin for perfect left/right alignment */
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+    }
+    
+.login-box input:focus, .login-box select:focus {
+    border-color: #90210b;
+    box-shadow: 0 0 5px rgba(144,33,11,0.4);
+}
+    
+    /* ===== Buttons ===== */
+    
+button {
+  width: 100%;
+  box-sizing: border-box; /* align width behavior with inputs */
+  padding: 10px;
+  margin: 8px 0;          /* vertical-only margin for perfect left/right alignment */
+  background: linear-gradient(135deg, #90210b, #dbab1b);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;     /* remove inline spacing quirks */
+  text-align: center; /* ensure label is centered */
+}
+    
+button:hover { 
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #dbab1b, #90210b);
+}
+    
+/* ===== Error Message ===== */
+    
+.error {
+  color: #e74c3c;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+    
+/* Main Content */
+  .main-content {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 20px 0 0 20px;
+}
+
+.main-content h1 {
+    color: #2575fc;
+    margin-bottom: 15px;
+}
+    
+.logo-container {
+  text-align: center;
+  margin-bottom: 15px;
+}
+    
+.logo-container img {
+  width: 150px; /* adjust size */
+  height: auto;
+  display: block;      /* ensure block-level for margin auto centering */
+  margin: 0 auto;      /* center horizontally */
+}
+
+.backgroundimageText {
+  text-align: center;
+  margin-top: 0px;
+  margin-left: 0px;
+}
+    
+.backgroundimageText img {
+  width: 250px; /* adjust size */
+}
+
+.register-cta #showRegisterBtn {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 8px 0;
+    background: transparent;
+    color: #90210b;
+    border: 2px solid #90210b;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+    .register-cta #showRegisterBtn:hover {
+      background: #90210b;
+      color: white;
+    }
+    
+    .register-box {
+      background: #D3D3D3;
+      padding: 25px 30px;
+      width: 320px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      margin-top: 16px;
+}
+    .register-box h2 {
+      font-family: 'Poppins', sans-serif;
+      color: #b32424;
+      margin-bottom: 20px;
+      font-size: 22px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .password-box {
+      position: relative;       /* allow absolute positioning of the eye */
+    }
+    .password-box input {
+      width: 100%;
+      box-sizing: border-box;   /* padding + border within width */
+      padding: 10px;            /* base padding */
+      padding-right: 42px;      /* room for eye on the right */
+      margin: 8px 0;            /* vertical spacing */
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      transition: 0.3s;
+    }
+    .password-box img {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .register-box input:focus, .register-box select:focus{
+      border-color: #90210b;
+      box-shadow: 0 0 5px rgba(144,33,11,0.4);
+  }
+
+     
+    .register-box .note {
+      font-size: 12px;
+      color: #444;
+      margin-top: 8px;
+    }
+    .register-actions {
+      margin-top: 8px;
+    }
+    .register-actions .secondary {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      margin: 8px 0;
+      background: transparent;
+      color: #90210b;
+      border: 2px solid #90210b;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .register-actions .secondary:hover {
+      background: #90210b;
+      color: white;
+    }
+
+
+/*LOGOUT INACTIVITY-------------------------------------------------------------------------------------*/
+/* =============================
+   INACTIVE LOGOUT MODAL FIX
+============================= */
+
+.inactive-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.inactive-modal-content {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.inactive-modal-content h2 {
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.inactive-modal-content button {
+    margin-top: 20px;
+    background: #b22222;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    width: 100%;
+    transition: 0.2s;
+}
+
+.inactive-modal-content button:hover {
+    background: #8b1a1a;
+}

@@ -1,0 +1,371 @@
+body, html {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+  min-height: 100vh;
+  margin:0; padding:0; height: 100%;
+  display: flex; flex-direction: column;
+  background-image: url(asset/images/StudentDashboard-bgfinal.png);
+  background-position: center center; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;
+}
+
+.dashboard-container { 
+  display:flex; flex:1; padding-left:0; 
+}
+.dashboard-container.with-sidebar-open { 
+  padding-left:0; 
+}
+
+.top-header { 
+  display:flex; justify-content: space-between; 
+  align-items:center; 
+  padding: 15px 25px;
+   margin-bottom: 30px; 
+}
+.top-header h1 { 
+  color:black; 
+  font-size:32px; 
+  margin-left: 15px; 
+}
+.welcome-text p { 
+  margin-top:10px; 
+  font-weight: bold; 
+  margin-left:25px; 
+}
+
+.header-actions { 
+  display:flex; 
+  gap:15px; 
+  align-items:center; 
+}
+.icon-btn {
+   background:none; 
+   border:none; 
+   font-size:22px; 
+   cursor:pointer; 
+   transition: transform .2s; 
+}
+.icon-btn:hover { 
+  transform: scale(1.2);
+ }
+.logout-btn { 
+  background:#ff4b5c; 
+  color:#fff; 
+  border:none; 
+  padding:8px 15px; 
+  border-radius:8px; 
+  cursor:pointer; 
+  font-weight:bold; 
+  transition:.3s; 
+}
+.logout-btn:hover { 
+  background:#e63946; 
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+ height: 100vh;
+ background: #90210b; /* keep background during entire slide; sidebar is off-screen when closed */
+ color: white;
+ padding: 30px;
+ display: flex;
+ flex-direction: column;
+ border-top-right-radius: 20px;
+ border-bottom-right-radius: 20px;
+ flex-shrink: 0;
+ position: fixed;
+ top: 0;
+ left: 0;
+ transform: translateX(-100%); /* fully hidden when closed */
+ transition: transform 0.5s ease-in-out;
+ z-index: 10000;
+ overflow: hidden; /* ensure children never extend beyond sidebar bounds during slide */
+ will-change: transform;
+ 
+}
+
+
+.sidebar.open {
+ transform: translateX(0);
+}
+
+/* when closed it is fully hidden; no pointer cursor needed */
+
+
+
+
+/* Overlay behind sidebar when open */
+.sidebar-overlay {
+ position: fixed;
+ inset: 0;
+ background: rgba(0,0,0,0.3);
+ opacity: 0;
+ visibility: hidden;
+ transition: opacity 0.5s ease-in-out;
+ z-index: 9999;
+}
+
+.sidebar-overlay.visible {
+ opacity: 1;
+ visibility: visible;
+}
+
+
+.sidebar-logo {
+   width: 30px;               /* adjust size */
+   height: auto;
+   margin-right: 10px; 
+   margin-left: 0;
+   cursor: pointer;
+   
+   
+}
+
+/* Launcher button shown when sidebar is hidden */
+.sidebar-launcher {
+ position: fixed;
+ top: 12px;
+ left: 12px;
+ z-index: 10002;
+ padding: 6px 10px;
+ border: none;
+ background: transparent;
+ cursor: pointer;
+}
+/* background is already defined on .sidebar, no need to restyle on open */
+
+.sidebar h2 {  
+   display: flex;
+   text-align: center;
+   align-items: center;
+   margin-bottom: 20px;
+   margin-left: 0;
+   font-size: 22px;
+   font-family: 'Droid Serif';
+   font-size: 35px;
+}
+
+/* When sidebar is open, position the title next to the launcher icon (left:12px, width:40px) */
+/* Title remains centered by default; no special positioning when open */
+
+.sidebar ul {
+ list-style: none;
+ margin-left: -25%; /* restored original offset */
+}
+
+.sidebar ul li {
+
+ margin: 15px 0;
+
+}
+.bottom {
+   margin-top: auto;
+   margin-bottom: 5px;
+   
+   
+}
+
+.sidebar ul li a { 
+ text-decoration: none;
+ color: white;
+ font-weight: 500;
+ display: block;
+ padding: 10px 12px;
+ border-radius: 8px;
+ transition: background 0.3s;
+ margin-left: 10px; /* original spacing restored */
+}
+
+.sidebar ul li a:hover {
+
+ background: #dbab1b;
+
+}
+
+/* Active/current page link */
+.sidebar ul li a.active {
+  background: #d4af37; /* gold */
+  color: #000; /* readable on gold */
+  font-weight: 700;
+  position: relative;
+}
+
+/* Left indicator bar for active item */
+.sidebar ul li a.active::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 24px;
+  background: #ffffff;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Keep hover from overriding active style */
+.sidebar ul li a:hover:not(.active) {
+  background: #dbab1b;
+  color: #000;
+}
+.main-content { 
+  flex:1; 
+  padding:30px; 
+  position:relative; 
+}
+
+/* History table aesthetics */
+.history-section {
+   margin: 0 50px; 
+   display: flex; 
+   flex-direction: column; 
+}
+.history-header { 
+  display:flex; 
+  justify-content: space-between;
+  align-items:center;
+  margin-bottom: 15px;
+}
+.history-header h2 {
+   margin:0;
+}
+
+.table { 
+  width:100%;
+  border-collapse: collapse; 
+  background:#fff;  
+  box-shadow: 0 10px 25px rgba(0,0,0,.08); 
+  table-layout: fixed; 
+}
+.table thead th { 
+  background:#dbab1b;
+  color:#222; 
+  font-weight:800; 
+  text-transform: uppercase; 
+  letter-spacing:.4px; 
+  font-size:13px; 
+  padding:14px 16px; 
+  border-bottom: 1px solid #e6e6e6; 
+  text-align: center; 
+}
+.table tbody td { 
+  padding:14px 16px;
+  border-bottom: 1px solid #f0f0f0; 
+  text-align: center; 
+}
+.table tbody tr:hover {
+   background: #fafcff; 
+}
+.table tbody tr:last-child td { 
+  border-bottom: none; 
+}
+
+/* Ensure consistent column widths for both header and body */
+.table th:nth-child(1), .table td:nth-child(1) { width: 25%; }
+.table th:nth-child(2), .table td:nth-child(2) { width: 25%; }
+.table th:nth-child(3), .table td:nth-child(3) { width: 25%; }
+.table th:nth-child(4), .table td:nth-child(4) { width: 25%; }
+
+.badge { padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; display: inline-block; }
+.badge.success { background:#e8f5e9; color:#2e7d32; }
+.badge.warning { background:#fff8e1; color:#ff8f00; }
+.badge.cancelled { background:#ffebee; color:#b32424; }
+.badge.critical { background:#ffebee; color:#c62828; }
+
+/* subtle separators */
+.divider { height: 1px; background: linear-gradient(to right, transparent, rgba(0,0,0,.08), transparent); margin: 24px 0; }
+
+@media (max-width: 768px) {
+
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .page-wrapper,
+    .content-wrapper,
+    .main-content {
+        padding: 40px 12px 40px;
+        max-width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    /* header stack like in Schedule */
+    .top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 6px;
+        padding: 16px 12px 10px;
+        margin-bottom: 18px;
+    }
+
+    .welcome-text {
+        margin: 0;
+    }
+
+    .top-header h1 {
+        font-size: 26px;
+        margin: 0;
+    }
+
+    .welcome-text p {
+        margin: 4px 0 0;
+        margin-left: 0;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    /* 🔹 make Logout full-width row, right-aligned (same as image) */
+    .header-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 4px;
+    }
+
+    .logout-btn {
+        padding: 6px 14px;
+        font-size: 14px;
+        border-radius: 999px;
+    }
+
+    .history-section {
+        margin: 0 12px;
+    }
+
+    .table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        table-layout: auto;
+    }
+
+    .table thead th,
+    .table tbody td {
+        white-space: nowrap;
+        word-break: normal;
+        overflow-wrap: normal;
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+
+    .table tbody td:nth-child(3) {
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    .table th:nth-child(1),
+    .table th:nth-child(2),
+    .table th:nth-child(3),
+    .table th:nth-child(4),
+    .table td:nth-child(1),
+    .table td:nth-child(2),
+    .table td:nth-child(3),
+    .table td:nth-child(4) {
+        width: auto;
+    }
+}

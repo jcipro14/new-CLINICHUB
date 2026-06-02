@@ -1,0 +1,402 @@
+body, html {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+  min-height: 100vh;
+  margin:0;
+  padding:0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url(asset/images/StudentDashboard-bgfinal.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.dashboard-container {
+  display: flex;
+  flex: 1;
+  padding-left: 0;
+}
+
+.dashboard-container.with-sidebar-open { padding-left: 0; }
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  margin-bottom: 30px;
+}
+.top-header h1 { color: black; font-size: 32px; margin-left: 15px; }
+.welcome-text p { margin-top: 10px; font-weight: bold; margin-left: 25px; }
+
+.header-actions { display: flex; gap: 15px; align-items: center; }
+.icon-btn { background: none; border: none; font-size: 22px; cursor: pointer; transition: transform 0.2s; }
+.icon-btn:hover { transform: scale(1.2); }
+.logout-btn { background: #ff4b5c; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+.logout-btn:hover { background: #e63946; }
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+ height: 100vh;
+ background: #90210b; /* keep background during entire slide; sidebar is off-screen when closed */
+ color: white;
+ padding: 30px;
+ display: flex;
+ flex-direction: column;
+ border-top-right-radius: 20px;
+ border-bottom-right-radius: 20px;
+ flex-shrink: 0;
+ position: fixed;
+ top: 0;
+ left: 0;
+ transform: translateX(-100%); /* fully hidden when closed */
+ transition: transform 0.5s ease-in-out;
+ z-index: 10000;
+ overflow: hidden; /* ensure children never extend beyond sidebar bounds during slide */
+ will-change: transform;
+ 
+}
+
+
+.sidebar.open {
+ transform: translateX(0);
+}
+
+/* when closed it is fully hidden; no pointer cursor needed */
+
+
+
+
+/* Overlay behind sidebar when open */
+.sidebar-overlay {
+ position: fixed;
+ inset: 0;
+ background: rgba(0,0,0,0.3);
+ opacity: 0;
+ visibility: hidden;
+ transition: opacity 0.5s ease-in-out;
+ z-index: 9999;
+}
+
+.sidebar-overlay.visible {
+ opacity: 1;
+ visibility: visible;
+}
+
+
+.sidebar-logo {
+   width: 30px;               /* adjust size */
+   height: auto;
+   margin-right: 10px; 
+   margin-left: 0;
+   cursor: pointer;
+   
+   
+}
+
+/* Launcher button shown when sidebar is hidden */
+.sidebar-launcher {
+ position: fixed;
+ top: 12px;
+ left: 12px;
+ z-index: 10002;
+ padding: 6px 10px;
+ border: none;
+ background: transparent;
+ cursor: pointer;
+}
+/* background is already defined on .sidebar, no need to restyle on open */
+
+.sidebar h2 {  
+   display: flex;
+   text-align: center;
+   align-items: center;
+   margin-bottom: 20px;
+   margin-left: 0;
+   font-size: 22px;
+   font-family: 'Droid Serif';
+   font-size: 35px;
+}
+
+/* When sidebar is open, position the title next to the launcher icon (left:12px, width:40px) */
+/* Title remains centered by default; no special positioning when open */
+
+.sidebar ul {
+ list-style: none;
+ margin-left: -25%; /* restored original offset */
+}
+
+.sidebar ul li {
+
+ margin: 15px 0;
+
+}
+.bottom {
+   margin-top: auto;
+   margin-bottom: 5px;
+   
+   
+}
+
+.sidebar ul li a { 
+ text-decoration: none;
+ color: white;
+ font-weight: 500;
+ display: block;
+ padding: 10px 12px;
+ border-radius: 8px;
+ transition: background 0.3s;
+ margin-left: 10px; /* original spacing restored */
+}
+
+.sidebar ul li a:hover {
+
+ background: #dbab1b;
+
+}
+
+/* Active/current page link */
+.sidebar ul li a.active {
+  background: #d4af37; /* gold */
+  color: #000; /* readable on gold */
+  font-weight: 700;
+  position: relative;
+}
+
+/* Left indicator bar for active item */
+.sidebar ul li a.active::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 24px;
+  background: #ffffff;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Keep hover from overriding active style */
+.sidebar ul li a:hover:not(.active) {
+  background: #dbab1b;
+  color: #000;
+}
+
+.main-content { 
+  flex: 1; 
+  padding: 30px; 
+  position: relative;
+}
+
+/* Cards and tables */
+.cards-container { 
+  display: flex;
+  gap: 30px; 
+  margin-top: 20px;
+  margin-left: 50px; 
+  flex-wrap: wrap; 
+}
+.card { 
+  flex: 1; 
+  min-width: 250px; 
+  background: #ffffff; 
+  padding: 20px; 
+  border-radius: 15px; 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+  border: 1px solid #e5e7eb; 
+  transition: all 0.5s ease-in-out; 
+}
+.card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+  border: 1px solid #d1d5db; 
+}
+.card h2 { 
+  color: black; 
+  margin-bottom: 15px; 
+}
+
+.schedule-section { 
+  margin: 0 50px; 
+}
+.schedule-header { 
+  display:flex; 
+  justify-content: space-between; 
+  align-items:center; 
+  margin-bottom: 15px; 
+}
+.schedule-header h2 { 
+  margin: 0; 
+}
+
+.table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  background: #fff; 
+  overflow: hidden; 
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
+  table-layout: fixed;
+}
+
+.table th,
+.table td { 
+  padding: 14px 16px; 
+  border-bottom: 1px solid #eee; 
+  text-align: center; 
+  /* 🔧 important: do NOT break every letter */
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* Only the Reason column can wrap into multiple lines */
+.table td:nth-child(3),
+.table th:nth-child(3) {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.table th { 
+  background: #dbab1b; 
+  font-weight: 700; 
+}
+
+
+/* Ensure consistent column widths and alignment with the header */
+.table th:nth-child(1), .table td:nth-child(1) { width: 22%; }
+.table th:nth-child(2), .table td:nth-child(2) { width: 20%; }
+.table th:nth-child(3), .table td:nth-child(3) { width: 38%; }
+.table th:nth-child(4), .table td:nth-child(4) { width: 20%; }
+.table tr:hover { background: #fafafa; }
+.status { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.status.upcoming { background: #e1f5fe; color: #0277bd; }
+.status.done { background: #e8f5e9; color: #2e7d32; }
+.status.cancelled { background: #ffebee; color: #c62828; }
+
+/* ======= Clickable row (only when date is available) ======= */
+.clickable-row { cursor: pointer; transition: all 0.2s ease; }
+.clickable-row:hover { background: linear-gradient(90deg, rgba(144,33,11,0.05), rgba(212,175,55,0.05)); }
+
+/* ======= Calendar Modal ======= */
+.calendar-modal { display:none; position:fixed; inset:0; z-index:10000; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); align-items:center; justify-content:center; }
+.calendar-modal-content { background:#fff; width:90%; max-width:720px; max-height:90vh; overflow:auto; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,0.35); }
+.calendar-modal-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; color:#fff; border-radius:18px 18px 0 0; background: linear-gradient(135deg, #90210b, #b32424); }
+.calendar-modal-header h2 { margin:0; font-weight:800; font-size:20px; }
+.close-modal-btn { width:36px; height:36px; border-radius:50%; border:2px solid rgba(255,255,255,0.5); background:transparent; color:#fff; font-size:22px; line-height:1; cursor:pointer; }
+.calendar-modal-body { padding:18px 20px; }
+.appointment-details { background: #f6f7fb; border-left:4px solid #d4af37; padding:14px; border-radius:10px; margin-bottom:16px; }
+.appointment-details p { margin:6px 0; }
+.instruction-text { margin-top:8px; color:#555; font-size:13px; font-style:italic; }
+
+.modal-calendar { background:#fff; border-radius:12px; padding:14px; box-shadow:0 6px 20px rgba(0,0,0,0.08); }
+.modal-calendar-header { text-align:center; margin-bottom:10px; }
+.modal-calendar-header h3 { margin:0; color:#90210b; font-weight:800; }
+.modal-calendar-grid { display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; }
+.modal-day-name { text-transform:uppercase; font-size:11px; font-weight:800; color:#666; text-align:center; padding:6px 0; }
+.modal-day-cell { min-height:64px; background:#f8f9fa; border:2px solid #e9ecef; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; }
+.modal-day-cell.empty { background:transparent; border:none; }
+.modal-day-number { font-weight:700; color:#333; }
+.modal-day-cell.appointment-day { background: linear-gradient(135deg, #90210b, #b32424); border-color:#d4af37; box-shadow:0 0 0 3px rgba(212,175,55,0.3); color:#fff; cursor:pointer; }
+.modal-day-cell.appointment-day .modal-day-number { color:#fff; }
+.appointment-indicator { margin-top:4px; }
+
+/* ======= Action Popup ======= */
+.action-popup { z-index:10001; }
+.action-popup-content { background:#fff; border:2px solid #d4af37; border-radius:12px; padding:12px; box-shadow:0 10px 30px rgba(0,0,0,0.25); min-width:200px; }
+.accept-btn, .cancel-btn { width:100%; padding:10px 12px; margin:6px 0 0; border:0; border-radius:8px; cursor:pointer; font-weight:700; }
+.accept-btn { background: linear-gradient(135deg, #4caf50, #2e7d32); color:#fff; }
+.cancel-btn { background: linear-gradient(135deg, #f44336, #c62828); color:#fff; }
+
+@media (max-width: 768px) {
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .page-wrapper,
+    .content-wrapper,
+    .main-content {
+        padding: 40px 12px 40px;
+        max-width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .schedule-section {
+        margin: 0 12px;
+        overflow-x: auto; /* for table scroll */
+    }
+
+    /* 🔹 HEADER LAYOUT ON MOBILE */
+    .top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 6px;
+        padding: 16px 12px 10px;
+        margin-bottom: 18px;
+    }
+
+    .welcome-text {
+        margin: 0;
+    }
+
+    .top-header h1 {
+        font-size: 26px;
+        margin: 0;
+    }
+
+    .welcome-text p {
+        margin: 4px 0 0;
+        margin-left: 0;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .header-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 4px;
+    }
+
+    .logout-btn {
+        padding: 6px 14px;
+        font-size: 14px;
+        border-radius: 999px;
+    }
+
+    /* 📋 TABLE MOBILE BEHAVIOR */
+    .table {
+        display: block;
+        min-width: 520px;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        table-layout: auto;
+    }
+
+    .table th,
+    .table td {
+        font-size: 13px;
+        padding: 10px 12px;
+        white-space: nowrap;
+        word-break: normal;
+        overflow-wrap: normal;
+    }
+
+    /* Reason can wrap */
+    .table td:nth-child(3),
+    .table th:nth-child(3) {
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+}
+

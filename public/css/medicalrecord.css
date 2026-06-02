@@ -1,0 +1,656 @@
+body {
+  background: url("bgfortables.jpg") no-repeat center top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body,
+html {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ========== DASHBOARD CONTAINER ========== */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.dashboard-container.with-sidebar-open {
+  padding-left: 0;
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background: #90210b;
+  color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+  z-index: 10000;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 9999;
+}
+
+.sidebar-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar-logo {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+  margin-left: 0;
+  cursor: pointer;
+}
+
+.sidebar-launcher {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 10002;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.sidebar-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.sidebar-icon span {
+  width: 26px;
+  height: 3px;
+  background: #b32424;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+
+.sidebar-icon:hover {
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.22);
+  transform: translateY(-2px);
+}
+
+.sidebar h2 {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 0;
+  font-size: 22px;
+  font-family: 'Droid Serif';
+  font-size: 35px;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-left: -25%;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.bottom {
+  margin-top: auto;
+  margin-bottom: 50px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.3s;
+  margin-left: 10px;
+}
+
+.sidebar ul li a:hover {
+  background: #dbab1b;
+}
+
+.sidebar ul li a.active {
+  background: #d4af37;
+  color: #000;
+  font-weight: 700;
+  position: relative;
+}
+
+.sidebar ul li a.active::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 24px;
+  background: #ffffff;
+  border-radius: 0 4px 4px 0;
+}
+
+.sidebar ul li a:hover:not(.active) {
+  background: #dbab1b;
+  color: #000;
+}
+
+/* ========== MAIN CONTENT ========== */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  margin-left: 0;
+  width: 100%;
+}
+
+/* ========== TOP HEADER ========== */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.welcome-text {
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.top-header h1 {
+  color: #b32424;
+  font-size: 26px;
+  margin: 0;
+}
+
+.header-actions {
+  position: absolute;
+  right: 25px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.logout-btn {
+  background: #ff4b5c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #e63946;
+}
+
+.record {
+  width: 90%;
+  margin: 0 auto;
+  padding: 6px 0 40px;
+}
+
+.patient-div {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.add-btn,
+.edit-btn {
+  background: #7a0909;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-btn:hover,
+.edit-btn:hover:hover {
+  background: #b32424;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th {
+  background-color: #b32424;
+  color: white;
+  padding: 30px;
+  text-transform: capitalize;
+  border: 1px solid #ddd;
+}
+
+table td {
+  padding: 20px;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.role-filter {
+  background: white;
+  border: 1px;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+
+.role-filter option {
+  background-color: white;
+  color: #000;
+  border-radius: 3px;
+}
+
+.role-filter option:checked,
+.role-filter option:hover {
+  background-color: white;
+  color: #000;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #b32424;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.modal-content .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.close-btn {
+  background: #aaa;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #888;
+}
+
+.save-btn {
+  background: #7a0909;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.save-btn:hover {
+  background: #b32424;
+}
+
+/* FOR EDIT MODAL */
+#editModal .modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+#editModal h2 {
+  margin-top: 0;
+  color: #b32424;
+}
+
+#editModal label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+#editModal input,
+#editModal select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+#editModal .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.autocomplete-container {
+  position: relative;
+  width: 100%;
+}
+
+.suggestions-box {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  z-index: 9999;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
+  margin-top: 3px;
+}
+
+.suggestion-item {
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: #f7f7f7;
+}
+
+.form-actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.table-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+.table-scroll table th {
+  position: sticky;
+  top: 0;
+  background: #a81f1f;
+  z-index: 10;
+}
+
+/* ===========================================================
+   ONLY THE FIX YOU REQUESTED — DO NOT TOUCH ANYTHING ABOVE
+   =========================================================== */
+
+/* REMOVE INPUT BORDERS IN EDIT MODAL */
+/* ===========================
+   CLEAN INPUT STYLE (NO BORDER)
+   =========================== */
+#editModal input[type="text"],
+#editModal input[type="date"] {
+  border: none !important;
+  border-bottom: 2px solid #ccc !important;
+  background: #f7f7f7 !important;
+  border-radius: 0;
+  padding: 10px;
+  font-size: 15px;
+}
+
+/* Read-only fields */
+#editModal input[readonly] {
+  background: #ececec !important;
+  color: #555;
+  pointer-events: none;
+}
+
+/* ===========================
+   MEDICINE DROPDOWN FIX
+   =========================== */
+/* Clean dropdown field */
+.med-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.med-input {
+  width: 100%;
+  padding: 10px 35px 10px 10px;
+  /* space for arrow */
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: #f9f9f9;
+  border-radius: 0;
+  font-size: 15px;
+}
+
+.med-input:focus {
+  outline: none;
+  border-bottom: 2px solid #b32424;
+  /* red highlight */
+}
+
+/* Arrow styling */
+.dropdown-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #444;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+/* Fix dropdown suggestions */
+#med-suggestions {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  max-height: 170px;
+  overflow-y: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 999999;
+}
+
+#med-suggestions .suggestion-item {
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+#med-suggestions .suggestion-item:hover {
+  background: #f2f2f2;
+}
+
+/*----------------------------------------------STYLE FOR SEARCH BAR--------------------------------------------------------------------------*/
+.search-container {
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#searchInput {
+  width: 260px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 2px solid #b32424;
+  /* UM Clinic Red */
+  background: #ffffff;
+  font-size: 15px;
+  outline: none;
+  color: #333;
+  transition: 0.25s ease;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#searchInput:focus {
+  border-color: #7a0909;
+  /* Darker red */
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+#searchInput::placeholder {
+  color: #666;
+  opacity: 0.8;
+}
+
+/*FOR FILTER*/
+
+.date-filter {
+  margin-left: 15px;
+  padding: 10px 14px;
+  border: 2px solid #b32424;
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  transition: 0.25s ease;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.date-filter:focus {
+  border-color: #7a0909;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ============================================================
+   🔧 FIX EDIT MODAL SIZE + RESPONSIVE + INTERNAL SCROLL
+   (Safe patch — does NOT affect anything else)
+   ============================================================ */
+
+#editModal {
+  align-items: flex-start !important; /* allow scroll if tall */
+  padding-top: 40px;
+}
+
+#editModal .modal-content {
+  width: 420px !important;          /* wider but still clean */
+  max-height: 80vh !important;      /* never exceed screen */
+  overflow-y: auto !important;      /* scroll INSIDE modal */
+  padding: 25px !important;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Make fields cleaner when modal scrolls */
+#editModal input,
+#editModal select {
+  background: #fdfdfd !important;
+}
+
+/* On small screens */
+@media (max-width: 500px) {
+  #editModal .modal-content {
+    width: 90% !important;
+    max-height: 85vh !important;
+  }
+}

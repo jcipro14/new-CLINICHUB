@@ -1,0 +1,1658 @@
+/* =========================================
+   GLOBAL SETTINGS / COLORS
+========================================= */
+:root {
+    --um-red: #c40703;
+    --um-red-dark: #8f0303;
+    --um-gold: #dbab1b;
+    --card-radius: 18px;
+    --shadow-soft: 0 10px 30px rgba(0,0,0,0.10);
+    --text-muted: #777;
+    --text-dark: #222;
+    --accent-main: #c40703;   /* used instead of blue */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* ✅ bring back BG image + UM theme */
+    background: url("asset/images/staffDashboard-bg.png") no-repeat center top fixed;
+    background-size: cover;
+    color: var(--text-dark);
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 240px;
+    background: linear-gradient(180deg, #b71c1c, #6d0000);
+    color: #fff;
+    padding: 30px 24px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: 10000;
+    box-shadow: 8px 0 20px rgba(0,0,0,0.18);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+    font-weight: 800;
+    font-size: 26px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 12px;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: #ffecec;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: background 0.2s, transform 0.2s, color 0.2s;
+}
+
+.sidebar ul li a:hover {
+    background: rgba(255,255,255,0.14);
+    transform: translateX(3px);
+}
+
+.sidebar ul li a.active {
+    background: #ffffff;
+    color: #b71c1c;
+    font-weight: 600;
+}
+
+/* Sidebar launcher */
+.sidebar-launcher {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 10001;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Overlay behind sidebar */
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+}
+
+.sidebar-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ✅ cards sit on top of BG image */
+.main-content {
+    flex: 1;
+    padding: 24px 40px 80px;
+    margin-left: 0;
+    background: transparent;
+}
+
+/* =========================================
+   TOP HEADER
+========================================= */
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.95);
+    border-radius: 18px;
+    padding: 18px 26px;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 24px;
+}
+
+.welcome-text h1 {
+    margin: 0 0 4px 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--um-red);
+}
+
+.welcome-text p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Announcements link / badge */
+.header-link {
+    text-decoration: none;
+    color: var(--um-red);
+    font-weight: 600;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-link:hover {
+    text-decoration: underline;
+}
+
+.notif-badge {
+    background: red;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 11px;
+}
+
+/* Logout button */
+.logout-btn {
+    border: none;
+    border-radius: 999px;
+    background: #ff4b5c;
+    color: #fff;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 6px 15px rgba(255,75,92,0.5);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s;
+}
+
+.logout-btn:hover {
+    background: #e63946;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(230,57,70,0.6);
+}
+
+/* =========================================
+   WELLNESS SNAPSHOT STATS ROW
+========================================= */
+
+.student-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.student-stat-card {
+    background: rgba(255,255,255,0.96);
+    border-radius: var(--card-radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle red→gold glow */
+.student-stat-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top left, rgba(196,7,3,0.16), transparent 55%),
+        radial-gradient(circle at top right, rgba(219,171,27,0.18), transparent 60%);
+    pointer-events: none;
+}
+
+.student-stat-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    color: #555;
+    font-weight: 600;
+}
+
+.student-stat-card .stat-num {
+    margin: 0 0 4px 0;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--um-red);
+}
+
+.student-stat-card span {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* =========================================
+   CARDS LAYOUT
+========================================= */
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.card {
+    background: rgba(255,255,255,0.96);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-soft);
+    padding: 18px 20px;
+}
+
+/* Appointment card */
+.appointment-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.appointment-card-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.appointment-status-pill {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #fff;
+}
+
+.appointment-status-pill.upcoming {
+    background: #2f855a;
+}
+
+.appointment-status-pill.pending {
+    background: #d69e2e;
+}
+
+.appointment-status-pill.completed {
+    background: #2b6cb0;
+}
+
+.appointment-status-pill.cancelled {
+    background: #c53030;
+}
+
+.appointment-card p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+/* Profile card */
+.profile-card h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.profile-card p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+/* =========================================
+   APPOINTMENTS OVERVIEW CARD
+========================================= */
+
+.appt-summary-card h2 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+}
+
+.appt-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.appt-chip {
+    border-radius: 14px;
+    padding: 8px 10px;
+    background: #fefaf5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.appt-chip .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.appt-chip .value {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.appt-chip.upcoming {
+    border: 1px solid #38a169;
+    background: #f0fff4;
+    color: #22543d;
+}
+
+.appt-chip.completed {
+    border: 1px solid #3182ce;
+    background: #ebf8ff;
+    color: #2a4365;
+}
+
+.appt-chip.cancelled {
+    border: 1px solid #e53e3e;
+    background: #fff5f5;
+    color: #742a2a;
+}
+
+.appt-summary-card .appt-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* =========================================
+   RECENT CLINIC ACTIVITY (TIMELINE)
+========================================= */
+
+.timeline-card h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.timeline-list {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+}
+
+.timeline-date {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-main);   /* 🔴 red instead of blue */
+}
+
+.timeline-body {
+    font-size: 13px;
+}
+
+.timeline-reason {
+    margin-bottom: 2px;
+}
+
+.timeline-medicine {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+/* =========================================
+   QUICK WELLNESS TIPS
+========================================= */
+
+.tips-card h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.tips-list {
+    margin: 8px 0 12px;
+    padding-left: 18px;
+    font-size: 13px;
+}
+
+.tips-list li {
+    margin-bottom: 4px;
+}
+
+.tips-link {
+    font-size: 13px;
+    color: var(--accent-main);     /* 🔴 red */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.tips-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   FEEDBACK SECTION
+========================================= */
+
+.feedback-card {
+    margin: 30px auto 30px;
+    max-width: 960px;
+    background: rgba(255,255,255,0.96);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-soft);
+    padding: 20px 24px;
+}
+
+.feedback-card h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.feedback-success {
+    background: #e6fffa;
+    border: 1px solid #38b2ac;
+    color: #285e61;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.feedback-card label {
+    display: block;
+    margin: 10px 0 4px;
+    font-size: 14px;
+}
+
+.feedback-card textarea {
+    width: 100%;
+    min-height: 90px;
+    resize: vertical;
+    border-radius: 10px;
+    border: 1px solid #cbd5e0;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.feedback-card select {
+    width: 100%;
+    border-radius: 8px;
+    padding: 8px 10px;
+    border: 1px solid #cbd5e0;
+    font-size: 14px;
+}
+
+.fb-submit-btn {
+    margin-top: 12px;
+    border: none;
+    border-radius: 999px;
+    background: var(--um-red);
+    color: #fff;
+    padding: 8px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 7px 18px rgba(155,28,28,0.45);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s;
+}
+
+.fb-submit-btn:hover {
+    background: var(--um-red-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(125,20,20,0.6);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    background: linear-gradient(90deg, #b30000, #e5383b);
+    /* or simple solid: background: #b30000; */
+    color: #fff;
+    padding: 22px 0;
+    margin-top: 10px;
+}
+
+/* Layout of the footer content */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LEFT SIDE: logo + UM text */
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.footer-left img {
+    height: 72px;          /* 🔺 bigger logo */
+    width: auto;
+}
+
+.footer-left h2 {
+    font-size: 30px;       /* 🔺 bigger “UM” */
+    margin: 0;
+    font-weight: 700;
+}
+
+.footer-left p {
+    font-size: 16px;       /* 🔺 bigger subtitle */
+    margin: 2px 0 0;
+}
+
+/* RIGHT SIDE: branches */
+.footer-right h3 {
+    font-size: 22px;       /* 🔺 bigger heading */
+    margin: 0 0 6px;
+    letter-spacing: 1px;
+}
+
+.footer-right ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.footer-right ul li {
+    font-size: 15px;       /* 🔺 bigger branch names */
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px 16px 70px;
+    }
+
+    .top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* ----- Sidebar UM logo above text ----- */
+.sidebar-logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;      /* space between logo and "UM CLINIC" */
+    margin-top: 5px;
+}
+
+.sidebar-logo img {
+    width: 70px;             /* adjust size as you like */
+    height: auto;
+    filter: drop-shadow(0 0 4px rgba(0,0,0,0.25));
+}
+
+
+/* ============================
+   Request Appointment button
+============================ */
+.request-btn {
+    background: linear-gradient(135deg, #d7261b, #f8463b);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(215,38,27,0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.request-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(215,38,27,0.4);
+    opacity: 0.95;
+}
+
+/* ============================
+   Request Appointment Modal
+============================ */
+.req-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s ease;
+    z-index: 999;
+}
+
+.req-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.req-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 460px;
+    max-width: 95vw;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+    transform: translate(-50%, -42%) scale(0.9);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    padding: 20px 22px 18px;
+    transition: 0.22s ease;
+}
+
+.req-modal.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.req-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.req-modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #b20808;
+}
+
+.req-close {
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+    color: #999;
+}
+.req-close:hover {
+    color: #333;
+}
+
+.req-form {
+    margin-top: 5px;
+}
+
+.req-field {
+    margin-bottom: 12px;
+}
+
+.req-field label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.req-field label span {
+    color: #d7261b;
+}
+
+.req-field input[type="date"],
+.req-field input[type="time"],
+.req-field textarea {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+.req-field textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.req-field small {
+    font-size: 11px;
+    color: #777;
+}
+
+.req-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.req-submit {
+    background: linear-gradient(135deg, #d7261b, #ff6b4a);
+    border: none;
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.req-submit:hover {
+    opacity: 0.95;
+}
+
+.req-cancel {
+    background: #f0f0f0;
+    border: none;
+    color: #333;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.req-cancel:hover {
+    background: #e3e3e3;
+}
+
+.req-success,
+.req-error {
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.req-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+.req-error {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* ======== STUDENT SPLASH SCREEN (SOFT OVERLAY) ======== */
+.um-splash {
+    position: fixed;
+    inset: 0;
+    /* 🔧 dark radial overlay so text below is dimmed */
+    background:
+        radial-gradient(circle at center,
+            rgba(0, 0, 0, 0.80) 0%,
+            rgba(0, 0, 0, 0.65) 35%,
+            rgba(0, 0, 0, 0.35) 70%,
+            transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    backdrop-filter: blur(3px);        /* slight blur of dashboard */
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease,
+        transform 0.7s ease;
+}
+
+.um-splash-content {
+    text-align: center;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    animation: umSplashPopIn 0.9s ease-out;
+}
+
+/* bigger logo */
+.um-splash-content img {
+    width: 210px;
+    height: auto;
+    margin-bottom: 14px;
+    filter:
+        drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35))
+        drop-shadow(0 0 22px rgba(255, 230, 150, 0.7));  /* soft golden glow */
+}
+
+/* clearer heading */
+.um-splash-content h1 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    color: #ffe066; /* gold text */
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* clearer subtitle */
+.um-splash-content p {
+    margin: 0;
+    font-size: 15px;
+    color: #f9fafb;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* when hidden */
+.um-splash.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(1.03);
+}
+
+/* pop-in effect: zoom + slight bounce + fade in */
+@keyframes umSplashPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.65) translateY(20px);
+        filter: blur(3px);
+    }
+    55% {
+        opacity: 1;
+        transform: scale(1.06) translateY(-4px);
+        filter: blur(0);
+    }
+    80% {
+        transform: scale(0.96) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* mobile tweak so text doesn’t get too big */
+@media (max-width: 480px) {
+    .um-splash-content h1 {
+        font-size: 26px;
+    }
+    .um-splash-content p {
+        font-size: 14px;
+    }
+}
+
+
+/* ============================
+   BASE THEME HOOK
+============================ */
+
+body.theme-default { }
+
+/* Shared background behavior for all themes */
+body[class*="theme-"] {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #0f172a;
+}
+
+/* Glass effect for cards on themed backgrounds */
+body[class*="theme-"] .card,
+body[class*="theme-"] .student-stat-card,
+body[class*="theme-"] .feedback-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+}
+/* ===== GLOWING SIDEBAR BUTTON FOR ALL THEMES (COMPACT) ===== */
+body[class*="theme-"] .sidebar-launcher {
+    background: rgba(15, 23, 42, 0.92);
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+    padding: 6px;                       /* 🔹 small padding only */
+    width: 44px;
+    height: 44px;                       /* 🔹 perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+}
+
+/* shrink the icon so it fits nicely inside */
+body[class*="theme-"] .sidebar-launcher img {
+    width: 22px !important;             /* override inline 40px */
+    height: auto;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.85))
+            brightness(0) invert(1);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* little hover pop */
+body[class*="theme-"] .sidebar-launcher:hover img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+            brightness(1.1) invert(1);
+}
+
+
+/* ============================
+   🎄 CHRISTMAS THEME (FIXED)
+============================ */
+
+body.theme-christmas {
+    background-image:
+        url("asset/themes/christmas.jpg"),
+        radial-gradient(circle at 10% 0%, rgba(248, 250, 252, 0.45), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(248, 250, 252, 0.35), transparent 60%),
+        linear-gradient(145deg, rgba(2, 44, 34, 0.95) 0%, rgba(6, 78, 59, 0.95) 35%, rgba(127, 29, 29, 0.95) 100%);
+    color: #111827; /* 🔴 MAIN TEXT NOW DARK, NOT WHITE */
+}
+
+/* Make cards almost solid white + dark text for readability */
+body.theme-christmas .card,
+body.theme-christmas .student-stat-card,
+body.theme-christmas .feedback-card {
+    background: rgba(255, 255, 255, 0.98); /* more opaque than before */
+    color: #111827;
+    border-top: 4px solid #f97373;
+}
+
+/* Header text colors */
+.theme-christmas .welcome-text h1 {
+    color: #b91c1c;         /* UM-style deep red */
+}
+
+.theme-christmas .welcome-text p {
+    color: #374151;
+}
+
+/* Buttons stay festive */
+.theme-christmas .request-btn {
+    background: linear-gradient(135deg, #b91c1c, #f97316);
+}
+
+.theme-christmas .logout-btn,
+.theme-christmas .fb-submit-btn {
+    background: linear-gradient(135deg, #b91c1c, #dc2626);
+}
+/* ===== GLOWING SIDEBAR BUTTON FOR ALL THEMES ===== */
+body[class*="theme-"] .sidebar-launcher {
+    background: rgba(15, 23, 42, 0.85);      /* dark round pill */
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+    padding: 6px 10px;                       /* keep same click area */
+    backdrop-filter: blur(6px);              /* soft glass glow */
+}
+
+body[class*="theme-"] .sidebar-launcher img {
+    /* white glowing lines like New Year */
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.85))
+            brightness(0) invert(1);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* little hover pop */
+body[class*="theme-"] .sidebar-launcher:hover img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+            brightness(1.1) invert(1);
+}
+
+
+
+/* ============================
+   🎃 HALLOWEEN THEME
+============================ */
+body.theme-halloween {
+    background-image:
+        url("asset/themes/halloween.jpg"),
+        radial-gradient(circle at top, rgba(249, 115, 22, 0.18), transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(217, 70, 239, 0.35), transparent 55%),
+        radial-gradient(circle at 15% 90%, rgba(14, 116, 144, 0.25), transparent 55%),
+        radial-gradient(circle at bottom, #020617, #000000);
+    color: #e5e7eb;
+}
+
+.theme-halloween .student-stat-card,
+.theme-halloween .card,
+.theme-halloween .feedback-card {
+    border-top: 4px solid #f97316;
+}
+
+.theme-halloween .request-btn {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #111827;
+}
+
+.theme-halloween .logout-btn,
+.theme-halloween .fb-submit-btn {
+    background: linear-gradient(135deg, #ea580c, #facc15);
+    color: #111827;
+}
+
+.theme-halloween .top-header {
+    color: #fbbf24;
+}
+/* ===== GLOWING SIDEBAR BUTTON FOR ALL THEMES ===== */
+body[class*="theme-"] .sidebar-launcher {
+    background: rgba(15, 23, 42, 0.85);      /* dark round pill */
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+    padding: 6px 10px;                       /* keep same click area */
+    backdrop-filter: blur(6px);              /* soft glass glow */
+}
+
+body[class*="theme-"] .sidebar-launcher img {
+    /* white glowing lines like New Year */
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.85))
+            brightness(0) invert(1);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* little hover pop */
+body[class*="theme-"] .sidebar-launcher:hover img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+            brightness(1.1) invert(1);
+}
+
+
+/* ============================
+   🇵🇭 INDEPENDENCE DAY THEME
+============================ */
+body.theme-independence_day {
+    /* dark overlay FIRST, then flag under it */
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(15, 23, 42, 0.35) 0%,
+            rgba(15, 23, 42, 0.70) 40%,
+            rgba(15, 23, 42, 0.88) 100%
+        ),
+        url("asset/themes/independence_day.jpg") center/cover fixed no-repeat;
+    color: #e5e7eb;
+}
+
+/* cards: solid enough + dark text so content is readable */
+.theme-independence_day .student-stat-card,
+.theme-independence_day .card,
+.theme-independence_day .feedback-card {
+    background: rgba(255, 255, 255, 0.95);
+    color: #111827;
+    border-top: 4px solid #0038a8; /* blue accent */
+}
+
+/* card titles readable */
+.theme-independence_day .student-stat-card h2,
+.theme-independence_day .card h2,
+.theme-independence_day .feedback-card h2 {
+    color: #111827;
+}
+
+/* keep your existing accent buttons */
+.theme-independence_day .request-btn {
+    background: linear-gradient(135deg, #0038a8, #0f766e);
+}
+
+.theme-independence_day .logout-btn,
+.theme-independence_day .fb-submit-btn {
+    background: linear-gradient(135deg, #ce1126, #ef4444);
+}
+
+/* main dashboard title stays gold */
+.theme-independence_day .top-header h1 {
+    color: #facc15;
+}
+/* ===== GLOWING SIDEBAR BUTTON FOR ALL THEMES ===== */
+body[class*="theme-"] .sidebar-launcher {
+    background: rgba(15, 23, 42, 0.85);      /* dark round pill */
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+    padding: 6px 10px;                       /* keep same click area */
+    backdrop-filter: blur(6px);              /* soft glass glow */
+}
+
+body[class*="theme-"] .sidebar-launcher img {
+    /* white glowing lines like New Year */
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.85))
+            brightness(0) invert(1);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* little hover pop */
+body[class*="theme-"] .sidebar-launcher:hover img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+            brightness(1.1) invert(1);
+}
+
+
+
+
+/* ============================
+   🎆 NEW YEAR THEME (v2)
+   Keep fireworks, fix readability
+============================ */
+body.theme-new_year {
+    /* Fireworks + a softer dark overlay so the image still shows */
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(15, 23, 42, 0.25) 0%,   /* light tint near top */
+            rgba(15, 23, 42, 0.55) 35%,  /* darker in the middle */
+            rgba(15, 23, 42, 0.75) 100%  /* darkest near bottom */
+        ),
+        url("asset/themes/new_year.jpg") center/cover fixed no-repeat;
+    color: #e5e7eb;
+}
+
+/* Cards: slightly transparent white so background is visible but text stays dark */
+body.theme-new_year .card,
+body.theme-new_year .student-stat-card,
+body.theme-new_year .feedback-card {
+    background: rgba(255, 255, 255, 0.92);
+    color: #111827;
+    border-top: 4px solid #facc15;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.40);
+}
+
+/* Make ALL text inside cards dark for readability */
+body.theme-new_year .card *,
+body.theme-new_year .student-stat-card *,
+body.theme-new_year .feedback-card * {
+    color: #111827 !important;
+}
+
+/* Header text over the bright top area */
+.theme-new_year .welcome-text h1 {
+    color: #facc15;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.theme-new_year .welcome-text p {
+    color: #fefce8;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Buttons keep the festive look but readable */
+.theme-new_year .request-btn {
+    background: linear-gradient(135deg, #facc15, #fb923c);
+    color: #111827;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.theme-new_year .logout-btn,
+.theme-new_year .fb-submit-btn {
+    background: linear-gradient(135deg, #22d3ee, #60a5fa);
+    color: #020617;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Sidebar burger stays visible on top of the image */
+.theme-new_year .sidebar-launcher {
+    background: rgba(15, 23, 42, 0.85);
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.theme-new_year .sidebar-launcher img {
+    filter: drop-shadow(0 0 3px #000) brightness(0) invert(1);
+}
+
+/* ============================
+   🎆 NEW YEAR THEME READABILITY FIX
+   (Override header text colors on bright top area)
+============================ */
+body.theme-new_year .top-header .welcome-text h1 {
+    color: #111827;          /* dark text so it's readable */
+    text-shadow: none;       /* remove glow on bright background */
+}
+
+body.theme-new_year .top-header .welcome-text p {
+    color: #1f2937;          /* dark gray subtitle */
+    text-shadow: none;
+}
+
+
+
+.clinic-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        border: 1px solid transparent;
+    }
+    .clinic-status-badge.clinic-open {
+        background: #dcfce7;
+        border-color: #bbf7d0;
+        color: #166534;
+    }
+    .clinic-status-badge.clinic-closed {
+        background: #fee2e2;
+        border-color: #fecaca;
+        color: #991b1b;
+    }
+
+    /* ===========================================
+   📱 FINAL MOBILE LAYOUT (cards di puputol)
+=========================================== */
+@media (max-width: 768px) {
+
+    .dashboard-container {
+        width: 100%;
+        overflow-x: hidden;   /* safety net pero hindi puputol text */
+    }
+
+    .main-content {
+        padding: 32px 12px 70px;
+        max-width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+        min-width: 0;         /* para hindi mag-overflow sa flex */
+    }
+
+    /* Top card: text sa taas, buttons sa baba */
+    .top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    /* Buttons area: allow wrap + full width */
+    .header-actions {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-start;
+    }
+
+    /* Each action takes full width = isang column */
+    .header-actions .request-btn,
+    .header-actions .header-link,
+    .header-actions form {
+        flex: 1 1 100%;
+    }
+
+    /* 🔹 MEDIUM-SIZE BUTTONS (sakto sa finger) */
+    .header-actions .request-btn,
+    .header-actions .logout-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        padding: 10px 14px;      /* mas manipis kaysa dati */
+        font-size: 14px;
+        border-radius: 999px;
+    }
+
+    /* Announcements row – button feel pero di sobrang laki */
+    .header-actions .header-link {
+        padding: 8px 10px;
+        font-size: 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 1 column lang lahat ng grids */
+    .student-stats-grid,
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Cards: medyo mas maliit sa 100% para may space sa gilid */
+    .card,
+    .student-stat-card,
+    .feedback-card {
+        width: calc(100% - 20px);  /* ~10px space left + right */
+        margin: 0 auto 16px;
+        box-sizing: border-box;
+    }
+ .footer {
+        padding-top: 12px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px 18px 24px;
+        gap: 16px;
+        border-radius: 24px 24px 0 0;
+    }
+
+    .footer-left {
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .footer-left img {
+        height: 56px;
+    }
+
+    .footer-left h2 {
+        font-size: 20px;
+    }
+
+    .footer-left p {
+        font-size: 13px;
+    }
+
+    .footer-right h3 {
+        font-size: 15px;
+    }
+
+    .footer-right ul {
+        padding-left: 0;
+    }
+
+    .footer-right li {
+        padding-left: 0;
+    }
+
+    .footer-right li::before {
+        display: none; /* cleaner list on small screens */
+    }
+
+    .footer-bottom {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll !important;
+        background-position: center top;
+        background-size: cover;
+    }
+}
+
+
+.alert-success {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(22, 101, 52, 0.18);
+
+    opacity: 1;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* when we hide it */
+.alert-success.hide {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+    pointer-events: none;
+}
+
+/* =========================================
+   MISSING DASHBOARD CLASSES (FIXES)
+========================================= */
+
+/* Welcome Banner */
+.welcome-banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,0.96);
+    border-radius: var(--card-radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 24px;
+}
+
+.dashboard-logo {
+    width: 90px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.welcome-text h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--um-red);
+}
+
+.welcome-text p {
+    margin: 0 0 2px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.status-open  { color: #166534; font-weight: 600; }
+.status-closed { color: #991b1b; font-weight: 600; }
+
+/* Stats Row */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: rgba(255,255,255,0.96);
+    border-radius: var(--card-radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(196,7,3,0.10), transparent 55%);
+    pointer-events: none;
+}
+
+.stat-number {
+    display: block;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--um-red);
+}
+
+.stat-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+/* Card heading */
+.card h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-block;
+    background: var(--um-red);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+.btn-primary:hover { opacity: 0.87; }
+
+.btn-link {
+    display: inline-block;
+    color: var(--um-red);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.btn-link:hover { text-decoration: underline; }
+
+/* Text helpers */
+.text-muted { color: var(--text-muted); font-size: 14px; }
+
+/* Badge Status */
+.badge-status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.badge-status.upcoming  { background: #d1fae5; color: #065f46; }
+.badge-status.pending   { background: #fef3c7; color: #92400e; }
+.badge-status.completed { background: #dbeafe; color: #1e40af; }
+.badge-status.cancelled { background: #fee2e2; color: #991b1b; }
+
+/* Confirmation Banner */
+.confirmation-banner {
+    background: #fffbeb;
+    border: 1px solid #fbbf24;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.confirmation-actions { display: flex; gap: 8px; }
+
+.btn-accept {
+    background: #22c55e;
+    color: #fff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-cancel {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* Recent Consultation Record Items */
+.record-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+    gap: 8px;
+}
+
+.record-item:last-child { border-bottom: none; }
+
+.record-date   { color: var(--text-muted); min-width: 80px; flex-shrink: 0; }
+.record-reason { flex: 1; }
+.record-medicine { color: var(--text-muted); }
+
+@media (max-width: 768px) {
+    .welcome-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,69 @@
+.page-title {
+    color: #8B1E0A;
+    font-size: 26px;
+    margin-bottom: 25px; /* Slightly more breathing room */
+}
+
+/* Add Button */
+.add-btn {
+    background: #8B1E0A;
+    color: white;
+    padding: 12px 18px; /* Unified consistent padding */
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px; /* Same spacing */
+}
+
+.add-btn:hover {
+    background: #6e1808;
+}
+
+/* Table Layout */
+.styled-table {
+    width: 100%; /* Make it cleaner and consistent with other pages */
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px; /* Balanced spacing above */
+}
+
+.styled-table th {
+    background: #8B1E0A;
+    color: white;
+    padding: 14px; /* More even spacing */
+    font-size: 15px;
+}
+
+.styled-table td {
+    padding: 12px 15px; /* More consistent horizontal spacing */
+    border-bottom: 1px solid #ddd;
+    font-size: 15px;
+}
+
+/* Action Buttons */
+.action-btn {
+    padding: 7px 12px; /* Uniform button sizing */
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin-right: 6px; /* Add spacing between Edit & Delete */
+}
+
+.edit {
+    background: #2b7cff;
+}
+
+.delete {
+    background: #c0392b;
+}
+
+.edit:hover {
+    background: #1d63d4;
+}
+
+.delete:hover {
+    background: #a32821;
+}

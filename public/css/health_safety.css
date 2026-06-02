@@ -1,0 +1,192 @@
+/* ============================
+   Health & Safety Page Styles
+   (Only used on health_safety.php)
+============================= */
+
+/* Layout tweaks just for this page */
+.main-content {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 30px 25px 60px;
+}
+
+/* Header styling */
+.top-header {
+    background: linear-gradient(90deg, #90210b, #d44d19);
+    border-radius: 18px;
+    padding: 22px 28px;
+    margin-bottom: 25px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.top-header .welcome-text h1 {
+    margin: 0 0 6px 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.top-header .welcome-text p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Make logout button stand out on colored header */
+.top-header .logout-btn {
+    background: #ff4b5c;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.top-header .logout-btn:hover {
+    background: #ff384b;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* ---- Cards ---- */
+
+.guide-card {
+    padding: 24px 26px;
+    margin-bottom: 22px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+    border-left: 6px solid #90210b;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.guide-card h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+
+.guide-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+}
+
+/* Section-specific accent colors using order */
+.guide-card:nth-of-type(1) {
+    border-left-color: #1f8fff;   /* First Aid – blue */
+}
+
+.guide-card:nth-of-type(2) {
+    border-left-color: #ff6f3c;   /* Health tips – orange */
+}
+
+.guide-card:nth-of-type(3) {
+    border-left-color: #ff3b6f;   /* Contacts – pink/red */
+}
+
+.guide-card:nth-of-type(4) {
+    border-left-color: #10b981;   /* Medicine – green */
+}
+
+.guide-card:nth-of-type(5) {
+    border-left-color: #8b5cf6;   /* Emergency procedures – violet */
+}
+
+/* Lists inside cards */
+
+.guide-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 4px 0 0 0;
+}
+
+.guide-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 7px;
+    line-height: 1.55;
+    font-size: 14.5px;
+    color: #444;
+}
+
+/* Custom bullet */
+.guide-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    color: #90210b;
+    font-size: 18px;
+}
+/* Hover Zoom Effect */
+.guide-img {
+    width: 170px;
+    max-height: 170px;
+    object-fit: contain;
+    float: right;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    border-radius: 14px;
+    background: #ffffff;
+    padding: 6px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+/* Hover enlarge */
+.guide-img:hover {
+    transform: scale(1.35);           /* bigger but safe */
+    box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+    z-index: 10;                      /* brings image forward */
+    position: relative;               /* prevents overlap issues */
+}
+
+
+
+
+
+
+/* Bold term at start (e.g. Cut:, Burn:) already uses <strong> in HTML */
+
+/* Page background flair (bottom pattern hint) */
+body::after {
+    content: "";
+    position: fixed;
+    bottom: -60px;
+    right: -80px;
+    width: 320px;
+    height: 220px;
+    background: radial-gradient(circle at top left, #ffb300, #d01616);
+    opacity: 0.6;
+    z-index: -1;
+    filter: blur(1px);
+}
+
+/* Small-screen adjustments */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px 12px 40px;
+    }
+
+    .top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .top-header .welcome-text h1 {
+        font-size: 20px;
+    }
+
+    .guide-card {
+        padding: 20px 18px;
+    }
+}

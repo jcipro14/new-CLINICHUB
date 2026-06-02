@@ -1,0 +1,33 @@
+.backup-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    width: 80%;
+}
+
+.backup-title {
+    color: #90210b;
+    margin-bottom: 10px;
+}
+
+.backup-btn {
+    background: #90210b;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.backup-btn:hover {
+    background: #751a09;
+}
+
+hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
