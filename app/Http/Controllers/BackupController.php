@@ -21,8 +21,13 @@ class BackupController extends Controller
 
     public function download()
     {
+        $connection = config('database.default');
+        if ($connection !== 'mysql' && $connection !== 'mariadb') {
+            abort(501, 'Database backup is only supported on MySQL/MariaDB.');
+        }
+
+        $dbName = config("database.connections.{$connection}.database");
         $tables = DB::select('SHOW TABLES');
-        $dbName = config('database.connections.mysql.database');
         $key    = 'Tables_in_' . $dbName;
 
         $sql = "-- ClinicHub Database Backup\n-- Generated: " . now() . "\n\nSET FOREIGN_KEY_CHECKS=0;\n\n";

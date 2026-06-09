@@ -30,7 +30,7 @@
             <tbody>
                 @forelse($records as $rec)
                 <tr>
-                    <td class="font-medium whitespace-nowrap">{{ $rec->date_consulted->format('M d, Y') }}</td>
+                    <td class="font-medium whitespace-nowrap">{{ $rec->date_consulted?->format('M d, Y') ?? '—' }}</td>
                     <td>{{ $rec->doctor }}</td>
                     <td>{{ $rec->reason }}</td>
                     <td>{{ $rec->medicine ?: '—' }}</td>

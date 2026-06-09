@@ -120,8 +120,8 @@
             <tbody>
                 @forelse($inventory as $item)
                 @php
-                    $isExpired  = $item->expiry_date->isPast();
-                    $isExpiring = !$isExpired && $item->expiry_date->diffInDays(now()) <= 30;
+                    $isExpired  = $item->expiry_date ? $item->expiry_date->isPast() : false;
+                    $isExpiring = $item->expiry_date && !$isExpired && $item->expiry_date->diffInDays(now()) <= 30;
                     $isLow      = $item->remaining_quantity <= 10 && $item->remaining_quantity > 0;
                     $isOut      = $item->remaining_quantity <= 0;
                     $rowClass   = $isExpired ? 'row-expired' : ($isExpiring ? 'row-expiring' : '');
@@ -131,7 +131,7 @@
                     <td class="font-medium">{{ $item->medicine_name }}</td>
                     <td class="text-xs text-slate-500 whitespace-nowrap">{{ $item->receive_date ? \Carbon\Carbon::parse($item->receive_date)->format('M d, Y') : '—' }}</td>
                     <td class="whitespace-nowrap">
-                        {{ $item->expiry_date->format('M d, Y') }}
+                        {{ $item->expiry_date?->format('M d, Y') ?? '—' }}
                         @if($isExpired)
                             <span class="tag-expired">EXPIRED</span>
                         @elseif($isExpiring)

@@ -31,8 +31,7 @@ class AuthController extends Controller
     // ── Show register page ─────────────────────────────────────
     public function showRegister()
     {
-        // FIXED: Pointing to the correct auth subdirectory view
-        return view('auth.login');
+        return view('auth.login', ['showRegister' => true]);
     }
 
     // ── Handle login ───────────────────────────────────────────

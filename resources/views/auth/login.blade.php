@@ -572,7 +572,7 @@
     document.getElementById('showRegisterBtn').addEventListener('click',()=>switchTo(lp,rp));
     document.getElementById('backToLoginBtn').addEventListener('click',()=>switchTo(rp,lp));
 
-    @if($errors->hasAny(['reg_id','reg_password','email','first_name','last_name']))
+    @if(($showRegister ?? false) || $errors->hasAny(['reg_id','reg_password','email','first_name','last_name']))
     lp.classList.add('hidden');rp.classList.remove('hidden');
     @endif
 

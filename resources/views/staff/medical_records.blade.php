@@ -42,7 +42,7 @@
                         <td class="font-medium">{{ $rec->name }}</td>
                         <td class="text-xs text-slate-400">{{ $rec->student_id }}</td>
                         <td>{{ $rec->staff }}</td>
-                        <td class="whitespace-nowrap">{{ $rec->date_consulted->format('M d, Y') }}</td>
+                        <td class="whitespace-nowrap">{{ $rec->date_consulted?->format('M d, Y') ?? '—' }}</td>
                         <td>{{ $rec->doctor }}</td>
                         <td class="max-w-[120px] truncate">{{ $rec->reason }}</td>
                         <td>{{ $rec->medicine ?: '—' }}</td>

@@ -84,7 +84,7 @@
             <tbody>
                 @forelse($records as $rec)
                 <tr>
-                    <td class="whitespace-nowrap text-sm">{{ $rec->date_consulted->format('M d, Y') }}</td>
+                    <td class="whitespace-nowrap text-sm">{{ $rec->date_consulted?->format('M d, Y') ?? '—' }}</td>
                     <td class="font-medium">{{ $rec->name }}</td>
                     <td class="text-xs text-slate-400">{{ $rec->student_id }}</td>
                     <td>{{ $rec->doctor }}</td>

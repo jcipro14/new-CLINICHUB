@@ -49,7 +49,7 @@
                     </td>
                     <td class="text-sm text-slate-600 whitespace-nowrap">
                         @if($lastVisit)
-                            <span class="text-slate-700">{{ $lastVisit->date_consulted->format('M d, Y') }}</span>
+                            <span class="text-slate-700">{{ $lastVisit->date_consulted?->format('M d, Y') ?? '—' }}</span>
                             <div class="text-xs text-slate-400 truncate max-w-[100px]">{{ $lastVisit->reason }}</div>
                         @else
                             <span class="text-slate-400 text-xs">No visits</span>

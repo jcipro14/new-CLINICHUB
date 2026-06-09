@@ -330,7 +330,7 @@ class AppointmentController extends Controller
                     'name'           => $student->full_name,
                     'staff'          => $staffUser->full_name,
                     'date_consulted' => $recDate,
-                    'doctor'         => $appointmentDoctor ?: ($student->id_number),
+                    'doctor'         => $appointmentDoctor ?: '',
                     'reason'         => $appointmentReason,
                     'status'         => $request->rec_status ?: 'Completed',
                     'medicine'       => $request->rec_medicine ?? '',

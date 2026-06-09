@@ -1021,7 +1021,7 @@ $_yearPct = (int) min(100, ($visitsThisYear / max($totalVisits, 1)) * 100);
                 <div class="w-9 h-9 bg-gradient-to-br from-red-50 to-rose-100 border border-red-100 rounded-xl flex items-center justify-center text-sm shrink-0">🩺</div>
                 <div class="flex-1 min-w-0">
                     <div class="text-sm font-semibold text-slate-800 truncate">{{ $rec->reason }}</div>
-                    <div class="text-[.7rem] text-slate-400 mt-0.5">{{ $rec->date_consulted->format('M d, Y') }}</div>
+                    <div class="text-[.7rem] text-slate-400 mt-0.5">{{ $rec->date_consulted?->format('M d, Y') ?? '—' }}</div>
                 </div>
                 @if($rec->medicine)
                 <span class="text-[.67rem] bg-blue-50 border border-blue-100 text-blue-600 font-semibold px-2 py-1 rounded-lg shrink-0 max-w-[82px] truncate">{{ Str::limit($rec->medicine,10) }}</span>
